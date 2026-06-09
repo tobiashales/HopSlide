@@ -1,0 +1,17 @@
+.DS_Store
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# Build products
+build/
+DerivedData/
+
+# CocoaPods generated dependencies
+Pods/
+
+# Private signing/auth material
+Notifications Auth Key/
+*.p8
