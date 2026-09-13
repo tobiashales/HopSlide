@@ -19,9 +19,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>48</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>48</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2060667001343293~8440831376</string>
 	<key>LSRequiresIPhoneOS</key>
