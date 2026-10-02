@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		F4C163E62199489300CEEBE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C163E52199489300CEEBE5 /* Assets.xcassets */; };
 		F4C4B82D27A0EAEA00CC4A70 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C4B82C27A0EAEA00CC4A70 /* GameKit.framework */; };
 		F4C53BDB20A4C1970069D2D5 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C53BDA20A4C1970069D2D5 /* MenuScene.swift */; };
+		F4C83CC93070309600ACBA1B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C83CC83070309600ACBA1B /* SceneDelegate.swift */; };
 		F4D43AA7217C4CD200484364 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D43AA6217C4CD200484364 /* CreditsScene.swift */; };
 		F4D43AA9217C4CED00484364 /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4D43AA8217C4CED00484364 /* CreditsScene.sks */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		F4C163E52199489300CEEBE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4C4B82C27A0EAEA00CC4A70 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		F4C53BDA20A4C1970069D2D5 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		F4C83CC83070309600ACBA1B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F4D43AA6217C4CD200484364 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		F4D43AA8217C4CED00484364 /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -309,6 +311,7 @@
 				F48BE439207992A6007EAFDF /* Actions.sks */,
 				F40BF2E1207FCF4B00BAF96F /* scrollingGround.swift */,
 				F48BE43D207992A6007EAFDF /* GameViewController.swift */,
+				F4C83CC83070309600ACBA1B /* SceneDelegate.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 			files = (
 				F40BF2E2207FCF4B00BAF96F /* scrollingGround.swift in Sources */,
 				F48BE43C207992A6007EAFDF /* GameScene.swift in Sources */,
+				F4C83CC93070309600ACBA1B /* SceneDelegate.swift in Sources */,
 				F4ADC334218BD5D700BBA9C0 /* GameOverScene.swift in Sources */,
 				F4C53BDB20A4C1970069D2D5 /* MenuScene.swift in Sources */,
 				F48BE43E207992A6007EAFDF /* GameViewController.swift in Sources */,

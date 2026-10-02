@@ -2,9 +2,9 @@
 //  deviceModel.swift
 //
 //  Created by Tobias Hales on 12/18/2023.
-//  Copyright © 2025 TobiasHales. All rights reserved.
+//  Copyright © 2026 TobiasHales. All rights reserved.
 
-// Updated by Tobias Hales on 10/06/2025
+// Updated by Tobias Hales on 10/02/2026
 //
 
 import Foundation
@@ -82,6 +82,9 @@ public extension UIDevice {
                 case "iPhone18,4":                                      return "iPhone Air"
                 case "iPhone18,1":                                      return "iPhone 17 Pro"
                 case "iPhone18,2":                                      return "iPhone 17 Pro Max"
+                case "iPhone18,5":                                      return "iPhone 17e"
+                case "iPhone19,2":                                      return "iPhone 18 Pro"
+                case "iPhone19,3", "iPhone19,7":                        return "iPhone 18 Pro Max"
                 
 
                 // MARK: - iPod
@@ -114,6 +117,8 @@ public extension UIDevice {
                 case "iPad13,16", "iPad13,17":                          return "iPad Air 5"
                 case "iPad14,8", "iPad14,9":                            return "iPad Air 6"
                 case "iPad14,10", "iPad14,11":                          return "iPad Air 7"
+                case "iPad15,3", "iPad15,4", "iPad15,5", "iPad15,6":    return "iPad Air 7"
+                case "iPad16,8", "iPad16,9", "iPad16,10", "iPad16,11":  return "iPad Air 8"
 
                 // MARK: - iPad Mini
                 case "iPad2,5", "iPad2,6", "iPad2,7":                   return "iPad Mini"
@@ -136,6 +141,7 @@ public extension UIDevice {
                 case "iPad13,4", "iPad13,5", "iPad13,6", "iPad13,7":    return "iPad Pro 11-inch 3"
                 case "iPad14,3", "iPad14,4":                            return "iPad Pro 11-inch 4"
                 case "iPad16,3", "iPad16,4":                            return "iPad Pro 11-inch 5"
+                case "iPad17,1", "iPad17,2":                            return "iPad Pro 11-inch 6"
 
                 // MARK: - iPad Pro 12.9
                 case "iPad6,7", "iPad6,8":                              return "iPad Pro 12.9-inch"
@@ -145,6 +151,7 @@ public extension UIDevice {
                 case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11":  return "iPad Pro 12.9-inch 5"
                 case "iPad14,5", "iPad14,6":                            return "iPad Pro 12.9-inch 6"
                 case "iPad16,5", "iPad16,6":                            return "iPad Pro 12.9-inch 7"
+                case "iPad17,3", "iPad17,4":                            return "iPad Pro 12.9-inch 8"
 
                 
                 //Other
@@ -168,6 +175,11 @@ public extension UIDevice {
     
     
     
+    // MARK: - isAppleTV
+    static var isAppleTV: Bool {
+        current.userInterfaceIdiom == .tv
+    }
+
     // MARK: - isIPad
     static var isIPad: Bool {
         let modelName = UIDevice.modelName
@@ -196,24 +208,16 @@ public extension UIDevice {
                modelName == "iPhone 14" || modelName == "iPhone 14 Plus" || modelName == "iPhone 14 Pro" || modelName == "iPhone 14 Pro Max" ||
                modelName == "iPhone 15" || modelName == "iPhone 15 Plus" || modelName == "iPhone 15 Pro" || modelName == "iPhone 15 Pro Max" ||
                modelName == "iPhone 16" || modelName == "iPhone 16 Plus" || modelName == "iPhone 16 Pro" || modelName == "iPhone 16 Pro Max" ||
-               modelName == "iPhone 16e" || modelName == "iPhone 17" || modelName == "iPhone 17 Pro" || modelName == "iPhone 17 Pro Max" || modelName == "iPhone Air"
-    }
-
-    // MARK: - isAppleTV
-    static var isAppleTV: Bool {
-        #if os(tvOS)
-        return true
-        #else
-        return UIDevice.current.userInterfaceIdiom == .tv
-        #endif
+               modelName == "iPhone 16e" || modelName == "iPhone 17" || modelName == "iPhone 17 Pro" || modelName == "iPhone 17 Pro Max" || modelName == "iPhone Air" ||
+               modelName == "iPhone 17e" || modelName == "iPhone 18 Pro" || modelName == "iPhone 18 Pro Max"
     }
     
     // MARK: - hasProMotion
     static var hasProMotion: Bool {
         let modelName = UIDevice.modelName
-        return modelName == "iPhone 13 Pro" || modelName == "iPhone 13 Pro Max" || modelName == "iPhone 14 Pro" || modelName == "iPhone 14 Pro Max" || modelName == "iPhone 15 Pro" || modelName == "iPhone 15 Pro Max" || modelName == "iPhone 16 Pro" || modelName == "iPhone 16 Pro Max" || modelName == "iPhone 17" || modelName == "iPhone Air" || modelName == "iPhone 17 Pro" || modelName == "iPhone 17 Pro Max" || modelName == "iPad Pro 12.9-inch 2" || modelName == "iPad Pro 12.9-inch 3" || modelName == "iPad Pro 12.9-inch 4" || modelName == "iPad Pro 12.9-inch 5" || modelName == "iPad Pro 12.9-inch 6" || modelName == "iPad Pro 12.9-inch 7" ||
+        return modelName == "iPhone 13 Pro" || modelName == "iPhone 13 Pro Max" || modelName == "iPhone 14 Pro" || modelName == "iPhone 14 Pro Max" || modelName == "iPhone 15 Pro" || modelName == "iPhone 15 Pro Max" || modelName == "iPhone 16 Pro" || modelName == "iPhone 16 Pro Max" || modelName == "iPhone 17" || modelName == "iPhone Air" || modelName == "iPhone 17 Pro" || modelName == "iPhone 17 Pro Max" || modelName == "iPhone 18 Pro" || modelName == "iPhone 18 Pro Max" || modelName == "iPad Pro 12.9-inch 2" || modelName == "iPad Pro 12.9-inch 3" || modelName == "iPad Pro 12.9-inch 4" || modelName == "iPad Pro 12.9-inch 5" || modelName == "iPad Pro 12.9-inch 6" || modelName == "iPad Pro 12.9-inch 7" || modelName == "iPad Pro 12.9-inch 8" ||
                modelName == "iPad Pro 10.5-inch" ||
-               modelName == "iPad Pro 11-inch 1" || modelName == "iPad Pro 11-inch 2" || modelName == "iPad Pro 11-inch 3" || modelName == "iPad Pro 11-inch 4" || modelName == "iPad Pro 11-inch 5"
+               modelName == "iPad Pro 11-inch 1" || modelName == "iPad Pro 11-inch 2" || modelName == "iPad Pro 11-inch 3" || modelName == "iPad Pro 11-inch 4" || modelName == "iPad Pro 11-inch 5" || modelName == "iPad Pro 11-inch 6"
     }
 
 }

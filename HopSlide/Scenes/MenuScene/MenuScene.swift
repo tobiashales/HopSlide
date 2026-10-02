@@ -58,6 +58,9 @@ class MenuScene: SKScene, GKGameCenterControllerDelegate {
     }
     
     override func didMove(to view: SKView) {
+        [backgroundImage, title, playButton, rateButton, creditsButton, leaderBoardButton, noAdButton, playPause]
+            .forEach { $0.removeFromParent() }
+
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
      
         let modelName = UIDevice.modelName
