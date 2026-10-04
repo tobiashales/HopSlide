@@ -774,7 +774,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HopSlide/HopSlide.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = BD2CBXER35;
 				INFOPLIST_FILE = HopSlide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Hop Slide";
@@ -783,7 +783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50;
+				MARKETING_VERSION = 51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BTPixels.HopSlide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -798,7 +798,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HopSlide/HopSlide.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = BD2CBXER35;
 				INFOPLIST_FILE = HopSlide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Hop Slide";
@@ -807,7 +807,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50;
+				MARKETING_VERSION = 51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BTPixels.HopSlide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
