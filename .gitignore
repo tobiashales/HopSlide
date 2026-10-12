@@ -15,3 +15,29 @@ Pods/
 # Private signing/auth material
 Notifications Auth Key/
 *.p8
+
+# Android generated output and machine-specific configuration
+.gradle*/
+.kotlin/
+build.nosync/
+.idea/
+*.iml
+local.properties
+ads.properties
+key.properties
+keystore.properties
+signing.properties
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+*.provisionprofile
+*.apk
+*.aab
+*.idsig
+/android/apk/
+
+# Local environment credentials
+.env
+.env.*
+!.env.example

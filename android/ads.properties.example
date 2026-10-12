@@ -1,0 +1,6 @@
+# Android IDs from this app's AdMob registration (not the iOS IDs).
+# Copy to ads.properties, then fill all three values before building release.
+# Debug builds ignore these values and always use Google's test ads.
+admob.appId=
+admob.bannerId=
+admob.interstitialId=
