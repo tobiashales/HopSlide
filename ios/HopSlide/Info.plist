@@ -19,9 +19,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>53</string>
+	<string>54</string>
 	<key>CFBundleVersion</key>
-	<string>53</string>
+	<string>54</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2060667001343293~8440831376</string>
 	<key>LSRequiresIPhoneOS</key>
