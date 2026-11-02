@@ -8,6 +8,10 @@ plugins {
 val adProperties = Properties().apply {
     rootProject.file("ads.properties").takeIf { it.isFile }?.inputStream()?.use { load(it) }
 }
+val signingPropertiesFile = rootProject.file("key.properties")
+val signingProperties = Properties().apply {
+    signingPropertiesFile.takeIf { it.isFile }?.inputStream()?.use { load(it) }
+}
 fun adProperty(key: String) = adProperties.getProperty(key, "").trim()
 fun quoted(value: String) = "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
@@ -23,6 +27,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true; buildConfig = true }
+    signingConfigs {
+        create("release") {
+            signingProperties.getProperty("storeFile")?.takeIf { it.isNotBlank() }?.let { storeFile = file(it) }
+            storePassword = signingProperties.getProperty("storePassword")
+            keyAlias = signingProperties.getProperty("keyAlias")
+            keyPassword = signingProperties.getProperty("keyPassword")
+        }
+    }
     buildTypes {
         debug {
             // Debug builds always use Google's test inventory, even with production properties present.
@@ -32,6 +44,7 @@ android {
             buildConfigField("String", "INTERSTITIAL_AD_UNIT_ID", quoted("ca-app-pub-3940256099942544/1033173712"))
         }
         release {
+            signingConfig = signingConfigs.getByName("release")
             manifestPlaceholders["admobAppId"] = adProperty("admob.appId")
             buildConfigField("boolean", "ADS_TEST_MODE", "false")
             buildConfigField("String", "BANNER_AD_UNIT_ID", quoted(adProperty("admob.bannerId")))
@@ -49,6 +62,10 @@ kotlin { jvmToolchain(17) }
 // Fail with actionable instructions rather than accidentally shipping test ads.
 tasks.matching { it.name == "preReleaseBuild" }.configureEach {
     doFirst {
+        val signingKeys = listOf("storeFile", "storePassword", "keyAlias", "keyPassword")
+        require(signingPropertiesFile.isFile && signingKeys.all { !signingProperties.getProperty(it).isNullOrBlank() }) {
+            "Add local Android upload-signing settings to android/key.properties before building a release."
+        }
         require(Regex("ca-app-pub-[0-9]{16}~[0-9]{10}").matches(adProperty("admob.appId")) &&
             listOf("admob.bannerId", "admob.interstitialId").all {
                 Regex("ca-app-pub-[0-9]{16}/[0-9]{10}").matches(adProperty(it))
