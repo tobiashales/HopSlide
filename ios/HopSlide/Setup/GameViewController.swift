@@ -12,7 +12,6 @@
 import UIKit
 import SpriteKit
 import GameplayKit
-import Firebase
 import AVFoundation
 import GoogleMobileAds
 import UserNotifications
@@ -21,17 +20,17 @@ import GameKit
 
 let defaults = UserDefaults.standard
 
-class GameViewController: UIViewController, GADFullScreenContentDelegate {
+class GameViewController: UIViewController, FullScreenContentDelegate {
 
     struct tempBestScore {
         static var temporaryBestScore = 0
     }
     
     //Create Interstitial Ad Variable
-    var interstitial: GADInterstitialAd!
+    var interstitial: InterstitialAd!
     
     //Connect banner size in storyboard to swift file
-    @IBOutlet weak var BannerView: GADBannerView!
+    @IBOutlet weak var BannerView: BannerView!
    
     override func viewDidLoad() {
 
@@ -87,8 +86,8 @@ class GameViewController: UIViewController, GADFullScreenContentDelegate {
     
     
     func createAndLoadInterstitial() {
-            let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: "ca-app-pub-2060667001343293/6350801146", request: request) { [weak self] (ad, error) in
+            let request = Request()
+            InterstitialAd.load(with: "ca-app-pub-2060667001343293/6350801146", request: request) { [weak self] (ad, error) in
                 if let error = error {
                     print("Failed to load interstitial ad with error: \(error.localizedDescription)")
                     return
@@ -100,7 +99,7 @@ class GameViewController: UIViewController, GADFullScreenContentDelegate {
 
     @objc func presentInterstitial() {
         if let ad = interstitial {
-            ad.present(fromRootViewController: self)
+            ad.present(from: self)
             createAndLoadInterstitial() // Optionally reload the interstitial after presenting
         } else {
             print("Ad wasn't ready")
@@ -113,7 +112,7 @@ class GameViewController: UIViewController, GADFullScreenContentDelegate {
         //Load ads
         BannerView.adUnitID = "ca-app-pub-2060667001343293/5946529974"
         BannerView.rootViewController = self
-        BannerView.load(GADRequest())
+        BannerView.load(Request())
     }
     
     

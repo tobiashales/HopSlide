@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseCore
 import UserNotifications
 import GoogleMobileAds
 import FirebaseMessaging
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.register(defaults: ["adsOrNot": "yes", "highscore": 0])
 
         // AdMob configuration
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        MobileAds.shared.start(completionHandler: nil)
 
         return true
     }

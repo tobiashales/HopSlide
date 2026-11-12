@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F947D5E778E5DA23DAC34C4 /* Pods_HopSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B2DF37C70AA52566E282B0 /* Pods_HopSlide.framework */; };
 		F40BF2E2207FCF4B00BAF96F /* scrollingGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40BF2E1207FCF4B00BAF96F /* scrollingGround.swift */; };
 		F427DB512190CA870069E2B9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = F427DB502190CA870069E2B9 /* spark.png */; };
 		F428945B217BA82A009AC9D5 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F428945A217BA82A009AC9D5 /* MenuScene.sks */; };
 		F44B064C219D3D5B00E9D285 /* deviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B064B219D3D5B00E9D285 /* deviceModel.swift */; };
 		F450749C21C4507300296A1B /* Green.sks in Resources */ = {isa = PBXBuildFile; fileRef = F450749B21C4507300296A1B /* Green.sks */; };
+		F451474430A58CBD00CE186C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F451474330A58CBD00CE186C /* FirebaseAnalytics */; };
+		F451474630A58CBD00CE186C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F451474530A58CBD00CE186C /* FirebaseCore */; };
+		F451474830A58CBD00CE186C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F451474730A58CBD00CE186C /* FirebaseMessaging */; };
+		F451474B30A58CD100CE186C /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = F451474A30A58CD100CE186C /* GoogleMobileAds */; };
 		F47D656A21C57122008DE738 /* blueSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = F47D656921C57122008DE738 /* blueSmoke.sks */; };
 		F47D656C21C5729B008DE738 /* redSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = F47D656B21C5729B008DE738 /* redSmoke.sks */; };
 		F48BE436207992A6007EAFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BE435207992A6007EAFDF /* AppDelegate.swift */; };
@@ -52,27 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03B01D31B15700F912D6D1C4 /* Pods-HopSlide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HopSlide.release.xcconfig"; path = "Target Support Files/Pods-HopSlide/Pods-HopSlide.release.xcconfig"; sourceTree = "<group>"; };
-		0E78D1CAD8EB921A3A5ED2BB /* Pods-HopSlide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HopSlide.debug.xcconfig"; path = "Target Support Files/Pods-HopSlide/Pods-HopSlide.debug.xcconfig"; sourceTree = "<group>"; };
-		91B2DF37C70AA52566E282B0 /* Pods_HopSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HopSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4057E072BDD6CE900294BF3 /* HopSlide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HopSlide.entitlements; sourceTree = "<group>"; };
-		F40BD3012BECA63B00581319 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40BF2E1207FCF4B00BAF96F /* scrollingGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scrollingGround.swift; sourceTree = "<group>"; };
 		F427DB502190CA870069E2B9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		F428945A217BA82A009AC9D5 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		F44B064B219D3D5B00E9D285 /* deviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deviceModel.swift; sourceTree = "<group>"; };
 		F450749B21C4507300296A1B /* Green.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Green.sks; sourceTree = "<group>"; };
-		F45A72EF27710914005E4C5A /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
-		F45A72F127710914005E4C5A /* Promises-LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Promises-LICENSE"; sourceTree = "<group>"; };
-		F45A72F227710914005E4C5A /* NanoPB-LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = "NanoPB-LICENSE"; sourceTree = "<group>"; };
-		F45A72F327710914005E4C5A /* OpenMeasurement-LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OpenMeasurement-LICENSE"; sourceTree = "<group>"; };
-		F45A72F427710914005E4C5A /* GoogleUtilities-LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = "GoogleUtilities-LICENSE"; sourceTree = "<group>"; };
-		F45A72F527710914005E4C5A /* GoogleAppMeasurementIdentitySupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleAppMeasurementIdentitySupport.xcframework; sourceTree = "<group>"; };
-		F45A72F627710914005E4C5A /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PromisesObjC.xcframework; sourceTree = "<group>"; };
-		F45A72F727710914005E4C5A /* UserMessagingPlatform.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserMessagingPlatform.xcframework; sourceTree = "<group>"; };
-		F45A72F827710914005E4C5A /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMobileAds.xcframework; sourceTree = "<group>"; };
-		F45A72F927710914005E4C5A /* GoogleAppMeasurement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleAppMeasurement.xcframework; sourceTree = "<group>"; };
-		F45A72FA27710914005E4C5A /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
 		F47D656921C57122008DE738 /* blueSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = blueSmoke.sks; sourceTree = "<group>"; };
 		F47D656B21C5729B008DE738 /* redSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = redSmoke.sks; sourceTree = "<group>"; };
 		F48BE432207992A6007EAFDF /* HopSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HopSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,39 +88,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F4A7114B2F81970E00A5FCE0 /* HopSlideTV */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = HopSlideTV;
-			sourceTree = "<group>";
-		};
-		F4A711592F81970F00A5FCE0 /* HopSlideTVTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = HopSlideTVTests;
-			sourceTree = "<group>";
-		};
-		F4A711632F81970F00A5FCE0 /* HopSlideTVUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = HopSlideTVUITests;
-			sourceTree = "<group>";
-		};
+		F4A7114B2F81970E00A5FCE0 /* HopSlideTV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HopSlideTV; sourceTree = "<group>"; };
+		F4A711592F81970F00A5FCE0 /* HopSlideTVTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HopSlideTVTests; sourceTree = "<group>"; };
+		F4A711632F81970F00A5FCE0 /* HopSlideTVUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HopSlideTVUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +98,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F451474B30A58CD100CE186C /* GoogleMobileAds in Frameworks */,
 				F4C4B82D27A0EAEA00CC4A70 /* GameKit.framework in Frameworks */,
-				3F947D5E778E5DA23DAC34C4 /* Pods_HopSlide.framework in Frameworks */,
+				F451474830A58CBD00CE186C /* FirebaseMessaging in Frameworks */,
+				F451474630A58CBD00CE186C /* FirebaseCore in Frameworks */,
+				F451474430A58CBD00CE186C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,22 +130,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		377072F0D685DBBBAD449149 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0E78D1CAD8EB921A3A5ED2BB /* Pods-HopSlide.debug.xcconfig */,
-				03B01D31B15700F912D6D1C4 /* Pods-HopSlide.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		6293E4A5EC2771435C795786 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F40BD3012BECA63B00581319 /* libFirebaseCore.a */,
 				F4C4B82C27A0EAEA00CC4A70 /* GameKit.framework */,
-				F45A72EE27710914005E4C5A /* GoogleMobileAdsSdkiOS-8.13.0 */,
-				91B2DF37C70AA52566E282B0 /* Pods_HopSlide.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,33 +146,6 @@
 			path = Particles;
 			sourceTree = "<group>";
 		};
-		F45A72EE27710914005E4C5A /* GoogleMobileAdsSdkiOS-8.13.0 */ = {
-			isa = PBXGroup;
-			children = (
-				F45A72EF27710914005E4C5A /* nanopb.xcframework */,
-				F45A72F027710914005E4C5A /* Licenses */,
-				F45A72F527710914005E4C5A /* GoogleAppMeasurementIdentitySupport.xcframework */,
-				F45A72F627710914005E4C5A /* PromisesObjC.xcframework */,
-				F45A72F727710914005E4C5A /* UserMessagingPlatform.xcframework */,
-				F45A72F827710914005E4C5A /* GoogleMobileAds.xcframework */,
-				F45A72F927710914005E4C5A /* GoogleAppMeasurement.xcframework */,
-				F45A72FA27710914005E4C5A /* GoogleUtilities.xcframework */,
-			);
-			name = "GoogleMobileAdsSdkiOS-8.13.0";
-			path = "../../Downloads/GoogleMobileAdsSdkiOS-8.13.0";
-			sourceTree = "<group>";
-		};
-		F45A72F027710914005E4C5A /* Licenses */ = {
-			isa = PBXGroup;
-			children = (
-				F45A72F127710914005E4C5A /* Promises-LICENSE */,
-				F45A72F227710914005E4C5A /* NanoPB-LICENSE */,
-				F45A72F327710914005E4C5A /* OpenMeasurement-LICENSE */,
-				F45A72F427710914005E4C5A /* GoogleUtilities-LICENSE */,
-			);
-			path = Licenses;
-			sourceTree = "<group>";
-		};
 		F48BE429207992A6007EAFDF = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +155,6 @@
 				F4A711632F81970F00A5FCE0 /* HopSlideTVUITests */,
 				F48BE433207992A6007EAFDF /* Products */,
 				6293E4A5EC2771435C795786 /* Frameworks */,
-				377072F0D685DBBBAD449149 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -343,18 +264,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F48BE44A207992A8007EAFDF /* Build configuration list for PBXNativeTarget "HopSlide" */;
 			buildPhases = (
-				B3509004A739636FAF982D94 /* [CP] Check Pods Manifest.lock */,
 				F48BE42E207992A6007EAFDF /* Sources */,
 				F48BE42F207992A6007EAFDF /* Frameworks */,
 				F48BE430207992A6007EAFDF /* Resources */,
-				961F77717A5B0868005541FC /* [CP] Embed Pods Frameworks */,
-				EFC801C226BE242204C81032 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HopSlide;
+			packageProductDependencies = (
+				F451474330A58CBD00CE186C /* FirebaseAnalytics */,
+				F451474530A58CBD00CE186C /* FirebaseCore */,
+				F451474730A58CBD00CE186C /* FirebaseMessaging */,
+				F451474A30A58CD100CE186C /* GoogleMobileAds */,
+			);
 			productName = HopSlide;
 			productReference = F48BE432207992A6007EAFDF /* HopSlide.app */;
 			productType = "com.apple.product-type.application";
@@ -462,6 +386,10 @@
 				Base,
 			);
 			mainGroup = F48BE429207992A6007EAFDF;
+			packageReferences = (
+				F451474230A58CBD00CE186C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F451474930A58CD100CE186C /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = F48BE433207992A6007EAFDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -518,65 +446,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		961F77717A5B0868005541FC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B3509004A739636FAF982D94 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HopSlide-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EFC801C226BE242204C81032 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HopSlide/Pods-HopSlide-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F48BE42E207992A6007EAFDF /* Sources */ = {
@@ -769,7 +638,6 @@
 		};
 		F48BE44B207992A8007EAFDF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E78D1CAD8EB921A3A5ED2BB /* Pods-HopSlide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HopSlide/HopSlide.entitlements;
@@ -793,7 +661,6 @@
 		};
 		F48BE44C207992A8007EAFDF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03B01D31B15700F912D6D1C4 /* Pods-HopSlide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HopSlide/HopSlide.entitlements;
@@ -1058,6 +925,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F451474230A58CBD00CE186C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.1.1;
+			};
+		};
+		F451474930A58CD100CE186C /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F451474330A58CBD00CE186C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F451474230A58CBD00CE186C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F451474530A58CBD00CE186C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F451474230A58CBD00CE186C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		F451474730A58CBD00CE186C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F451474230A58CBD00CE186C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		F451474A30A58CD100CE186C /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F451474930A58CD100CE186C /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F48BE42A207992A6007EAFDF /* Project object */;
 }
