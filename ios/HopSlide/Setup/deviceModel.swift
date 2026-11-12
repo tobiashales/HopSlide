@@ -4,7 +4,7 @@
 //  Created by Tobias Hales on 12/18/2023.
 //  Copyright © 2026 TobiasHales. All rights reserved.
 
-// Updated by Tobias Hales on 10/02/2026
+// Updated by Tobias Hales on 11/12/2026
 //
 
 import Foundation
@@ -131,6 +131,7 @@ public extension UIDevice {
                 case "iPad11,1", "iPad11,2":                            return "iPad Mini 5"
                 case "iPad14,1", "iPad14,2":                            return "iPad Mini 6"
                 case "iPad15,1", "iPad15,2":                            return "iPad Mini 7"
+                case "iPad19,1", "iPad19,2":                            return "iPad Mini 8"
 
                 // MARK: - iPad Pro 9.7
                 case "iPad6,3", "iPad6,4":                              return "iPad Pro 9.7-inch"
@@ -165,7 +166,8 @@ public extension UIDevice {
             switch identifier {
             case "AppleTV5,3": return "Apple TV 4"
             case "AppleTV6,2": return "Apple TV 4K"
-            case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
+            case "AppleTV18,1": return "Apple TV 4K (4th generation)"
+            case "i386", "x86_64", "arm64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
             default: return identifier
             }
             #endif
