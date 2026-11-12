@@ -57,3 +57,7 @@ Install the generated debug APK after building:
 adb install -r app/build.nosync/outputs/apk/debug/app-debug.apk
 ```
 AdMob account configuration and production behavior are documented in [ads setup](docs/ADS_SETUP.md).
+
+## Google Play quality follow-up
+
+See [November 2026 fixes](docs/GOOGLE_PLAY_FIXES.md) for release optimization, screenshot-specific changes, verification, and remaining SDK limitations.

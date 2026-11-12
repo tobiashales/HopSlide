@@ -21,9 +21,12 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.MobileAds
+import com.google.android.libraries.ads.mobile.sdk.initialization.InitializationConfig
+import com.google.android.libraries.ads.mobile.sdk.common.*
+import com.google.android.libraries.ads.mobile.sdk.banner.*
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAdEventCallback
 import com.google.android.ump.*
 
 /** One owner per Activity; unavailable ads never delay navigation or appear later unexpectedly. */
@@ -50,7 +53,7 @@ class AdsController(private val activity: Activity) {
             UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) form@{ error ->
                 if (disposed) return@form
                 consentGeneration++
-                interstitial = null
+                clearInterstitial()
                 error?.let { Log.w("BigTimePixelsAds", "Consent: ${it.message}") }
                 initializeIfAllowed()
             }
@@ -66,13 +69,20 @@ class AdsController(private val activity: Activity) {
 
     private fun initializeIfAllowed(allowTestInventory: Boolean = false) {
         if (allowTestInventory && BuildConfig.ADS_TEST_MODE) testFallbackAllowed = true
-        if (disposed || !allowedToRequest) { ready = false; interstitial = null; return }
+        if (disposed || !allowedToRequest) { ready = false; clearInterstitial(); return }
         if (initialized) { ready = true; loadInterstitial(); return }
         if (initializing) return
         initializing = true
         Thread {
-            MobileAds.initialize(activity.applicationContext) {
+            try {
+                MobileAds.initialize(activity.applicationContext, InitializationConfig.Builder(BuildConfig.ADMOB_APP_ID).build())
                 handler.post { if (!disposed) { initialized = true; initializing = false; ready = allowedToRequest; if (ready) loadInterstitial() } }
+            } catch (error: Exception) {
+                handler.post {
+                    initializing = false
+                    Log.w("BigTimePixelsAds", "Initialization unavailable", error)
+                    if (!disposed) handler.postDelayed({ initializeIfAllowed() }, 60_000)
+                }
             }
         }.start()
     }
@@ -81,8 +91,13 @@ class AdsController(private val activity: Activity) {
         if (ready && !showing) loadInterstitial()
     }
 
+    private fun clearInterstitial() {
+        interstitial?.destroy()
+        interstitial = null
+    }
+
     private fun expireInterstitial() {
-        if (interstitial != null && SystemClock.elapsedRealtime() - loadedAt >= 3_600_000L) interstitial = null
+        if (interstitial != null && SystemClock.elapsedRealtime() - loadedAt >= 3_600_000L) clearInterstitial()
     }
 
     private fun loadInterstitial() {
@@ -90,18 +105,23 @@ class AdsController(private val activity: Activity) {
         if (!ready || !allowedToRequest || disposed || loading || showing || interstitial != null) return
         loading = true
         val requestGeneration = consentGeneration
-        InterstitialAd.load(activity, BuildConfig.INTERSTITIAL_AD_UNIT_ID, AdRequest.Builder().build(), object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(AdRequest.Builder(BuildConfig.INTERSTITIAL_AD_UNIT_ID).build(), object : AdLoadCallback<InterstitialAd> {
             override fun onAdLoaded(ad: InterstitialAd) {
-                loading = false
-                if (!disposed && ready && allowedToRequest) {
-                    if (requestGeneration == consentGeneration) { interstitial = ad; loadedAt = SystemClock.elapsedRealtime() }
-                    else loadInterstitial()
+                handler.post {
+                    loading = false
+                    if (!disposed && ready && allowedToRequest) {
+                        if (requestGeneration == consentGeneration) { interstitial = ad; loadedAt = SystemClock.elapsedRealtime() }
+                        else { ad.destroy(); loadInterstitial() }
+                    } else ad.destroy()
                 }
             }
-            override fun onAdFailedToLoad(error: LoadAdError) {
-                loading = false
-                Log.w("BigTimePixelsAds", "Interstitial unavailable: ${error.message}")
-                handler.postDelayed({ loadInterstitial() }, 60_000)
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                handler.post {
+                    if (disposed) return@post
+                    loading = false
+                    Log.w("BigTimePixelsAds", "Interstitial unavailable: ${adError.message}")
+                    handler.postDelayed({ loadInterstitial() }, 60_000)
+                }
             }
         })
     }
@@ -115,11 +135,11 @@ class AdsController(private val activity: Activity) {
             (activity is androidx.lifecycle.LifecycleOwner && !activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED))) return false
         interstitial = null
         showing = true
-        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
-            private fun finished() { showing = false; loadInterstitial() }
+        ad.adEventCallback = object : InterstitialAdEventCallback {
+            private fun finished() { handler.post { showing = false; if (!disposed) loadInterstitial() } }
             override fun onAdDismissedFullScreenContent() = finished()
-            override fun onAdFailedToShowFullScreenContent(error: AdError) {
-                Log.w("BigTimePixelsAds", "Interstitial skipped: ${error.message}")
+            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
+                Log.w("BigTimePixelsAds", "Interstitial skipped: ${fullScreenContentError.message}")
                 finished()
             }
         }
@@ -133,13 +153,13 @@ class AdsController(private val activity: Activity) {
             error?.let { Log.w("BigTimePixelsAds", "Privacy options: ${it.message}") }
             privacyRequired = consent.privacyOptionsRequirementStatus == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
             consentGeneration++
-            interstitial = null
+            clearInterstitial()
             if (!allowedToRequest) { ready = false }
             else initializeIfAllowed()
         }
     }
 
-    fun dispose() { disposed = true; ready = false; interstitial = null; handler.removeCallbacksAndMessages(null) }
+    fun dispose() { disposed = true; ready = false; clearInterstitial(); handler.removeCallbacksAndMessages(null) }
 }
 
 private tailrec fun Context.activity(): Activity = when (this) {
@@ -164,49 +184,54 @@ private tailrec fun Context.activity(): Activity = when (this) {
 /** Original iOS placement: persistent 50-point overlay above the home safe area.
  * No white placeholder is retained offline or after an unsuccessful request. */
 @Composable fun AdBanner(ads: AdsController, modifier: Modifier = Modifier) {
+    // Next-Gen requires initialization before AdView construction. Recreate the view
+    // when consent changes so a stale request can never become visible afterwards.
+    if (ads.ready) key(ads.consentGeneration) { ReadyAdBanner(modifier) }
+}
+
+@Composable private fun ReadyAdBanner(modifier: Modifier) {
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
-    var loaded by remember { mutableStateOf(false) }
     val handler = remember { Handler(Looper.getMainLooper()) }
-    val adView = remember(context) { AdView(context).apply {
-        adUnitId = BuildConfig.BANNER_AD_UNIT_ID
-        setAdSize(AdSize.BANNER)
-    } }
+    val adView = remember(context) { AdView(context) }
+    var loaded by remember { mutableStateOf(false) }
     var requesting by remember { mutableStateOf(false) }
-    var requestGeneration by remember { mutableIntStateOf(0) }
+    var disposed by remember { mutableStateOf(false) }
     fun requestBanner() {
-        if (ads.ready && !requesting && lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-            requesting = true
-            requestGeneration = ads.consentGeneration
-            adView.loadAd(AdRequest.Builder().build())
-        }
+        if (disposed || requesting || loaded || !lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) return
+        requesting = true
+        adView.loadAd(BannerAdRequest.Builder(BuildConfig.BANNER_AD_UNIT_ID, AdSize.BANNER).build(),
+            object : AdLoadCallback<BannerAd> {
+                override fun onAdLoaded(ad: BannerAd) {
+                    handler.post {
+                        if (!disposed) { requesting = false; loaded = true }
+                    }
+                }
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    handler.post {
+                        if (!disposed) {
+                            requesting = false
+                            Log.w("BigTimePixelsAds", "Banner unavailable: ${adError.message}")
+                            handler.postDelayed({ requestBanner() }, 60_000)
+                        }
+                    }
+                }
+            })
     }
     DisposableEffect(adView, lifecycle) {
-        adView.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                requesting = false
-                loaded = ads.ready && requestGeneration == ads.consentGeneration
-                if (!loaded && ads.ready) requestBanner()
-            }
-            override fun onAdFailedToLoad(error: LoadAdError) {
-                requesting = false
-                Log.w("BigTimePixelsAds", "Banner unavailable: ${error.message}")
-                handler.postDelayed({ requestBanner() }, 60_000)
-            }
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) requestBanner()
         }
-        val observer = LifecycleEventObserver { _, event -> when (event) {
-            Lifecycle.Event.ON_RESUME -> { adView.resume(); if (!loaded) requestBanner() }
-            Lifecycle.Event.ON_PAUSE -> adView.pause()
-            else -> Unit
-        } }
         lifecycle.addObserver(observer)
-        onDispose { lifecycle.removeObserver(observer); handler.removeCallbacksAndMessages(null); adView.adListener = object : AdListener() {}; adView.destroy() }
+        requestBanner()
+        onDispose {
+            disposed = true
+            lifecycle.removeObserver(observer)
+            handler.removeCallbacksAndMessages(null)
+            adView.destroy()
+        }
     }
-    LaunchedEffect(ads.ready, ads.consentGeneration) {
-        loaded = false
-        if (ads.ready) { adView.resume(); requestBanner() } else adView.pause()
-    }
-    if (loaded) Box(modifier.fillMaxWidth().navigationBarsPadding().clipToBounds(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+    if (loaded) Box(modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom)).clipToBounds(), contentAlignment = androidx.compose.ui.Alignment.Center) {
         Box(Modifier.fillMaxWidth().height(50.dp).background(Color.White), contentAlignment = androidx.compose.ui.Alignment.Center) {
             AndroidView(factory = { adView }, modifier = Modifier.size(320.dp, 50.dp))
         }

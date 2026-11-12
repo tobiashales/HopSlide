@@ -115,7 +115,9 @@ private fun HopSlideApp(vm: HopSlideViewModel = viewModel()) {
         best = settings.best().toInt()
         vm.menu()
     }
-    Box(Modifier.fillMaxSize().background(Ink)) {
+    Box(Modifier.fillMaxSize().background(Ink).windowInsetsPadding(
+        WindowInsets.safeDrawing
+    )) {
         when (vm.screen) {
             Screen.PLAYING.name -> {
                 key(vm.runId) {

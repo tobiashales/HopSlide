@@ -22,8 +22,8 @@ android {
         applicationId = "com.bigtimepixels.hopslide"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.1"
+        versionCode = 4
+        versionName = "1.1.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true; buildConfig = true }
@@ -39,13 +39,18 @@ android {
         debug {
             // Debug builds always use Google's test inventory, even with production properties present.
             manifestPlaceholders["admobAppId"] = "ca-app-pub-3940256099942544~3347511713"
+            buildConfigField("String", "ADMOB_APP_ID", quoted("ca-app-pub-3940256099942544~3347511713"))
             buildConfigField("boolean", "ADS_TEST_MODE", "true")
             buildConfigField("String", "BANNER_AD_UNIT_ID", quoted("ca-app-pub-3940256099942544/6300978111"))
             buildConfigField("String", "INTERSTITIAL_AD_UNIT_ID", quoted("ca-app-pub-3940256099942544/1033173712"))
         }
         release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
             manifestPlaceholders["admobAppId"] = adProperty("admob.appId")
+            buildConfigField("String", "ADMOB_APP_ID", quoted(adProperty("admob.appId")))
             buildConfigField("boolean", "ADS_TEST_MODE", "false")
             buildConfigField("String", "BANNER_AD_UNIT_ID", quoted(adProperty("admob.bannerId")))
             buildConfigField("String", "INTERSTITIAL_AD_UNIT_ID", quoted(adProperty("admob.interstitialId")))
@@ -75,7 +80,8 @@ tasks.matching { it.name == "preReleaseBuild" }.configureEach {
     }
 }
 dependencies {
-    implementation("com.google.android.gms:play-services-ads:25.5.0")
+    implementation("com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.6.0")
+    implementation("androidx.fragment:fragment:1.8.9")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
     implementation(platform("androidx.compose:compose-bom:2025.10.01"))
     implementation("androidx.core:core-ktx:1.17.0")
@@ -90,4 +96,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.9.4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     testImplementation("junit:junit:4.13.2")
+}
+
+configurations.configureEach {
+    exclude(group = "com.google.android.gms", module = "play-services-ads")
+    exclude(group = "com.google.android.gms", module = "play-services-ads-lite")
 }
